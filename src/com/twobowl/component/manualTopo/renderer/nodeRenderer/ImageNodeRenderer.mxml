@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="32" height="32" creationComplete="init()">
+<mx:Script>
+	<![CDATA[
+		
+		private function init():void{
+			//this.data一般是node
+			
+			myImage.source=this.data.data.@imgUrl;
+//			this.x=int(this.data.data.@x);
+//			this.y=int(this.data.data.@y);
+		}
+	]]>
+</mx:Script>
+	<mx:Image id="myImage" source="" alpha="0.9"/>
+</mx:VBox>

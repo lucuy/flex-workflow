@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" creationComplete="onLoad(event);" layout="absolute" width="400" height="300"  showCloseButton="true" close="closeHandler()" title="打开流程图" backgroundAlpha="0.67">
+	<mx:Script>   
+        <![CDATA[   
+            import mx.managers.PopUpManager; 
+            import mx.controls.Alert;  
+            import mx.collections.ArrayCollection;
+            [Bindable]
+			private var properties: ArrayCollection = new ArrayCollection();
+			public var callBack:Function;  //回调函数 
+            private function closeHandler(): void{   
+            	var save:Object = SharedObject.getLocal("save");
+            //	Alert.show(save.data.value);
+                PopUpManager.removePopUp(this);   
+            }   
+            private function openFile(): void{
+            	var save:Object = SharedObject.getLocal("save");
+            	var str:String = save.data.value;
+                PopUpManager.removePopUp(this);   
+                callBack.call(this); 
+              
+            }
+           	internal function onLoad(event: Event):void{
+              var save:Object = SharedObject.getLocal("save");
+              	properties.addItem({label:  save.data.name, data: save.data.name});	
+            }
+        ]]>   
+    </mx:Script>   
+	<mx:Button x="58" y="193" label="打开" labelPlacement="bottom" id="save" enabled="true" click="openFile()"/>
+	<mx:Button x="243" y="193" label="取消" id="cancel" labelPlacement="bottom" enabled="true" click="closeHandler()"/>
+	<mx:ComboBox x="44" y="44" width="292" height="37" id="choose" editable="false" enabled="true">
+	 <mx:dataProvider>
+	{properties}
+	</mx:dataProvider>
+
+	</mx:ComboBox>
+</mx:TitleWindow>

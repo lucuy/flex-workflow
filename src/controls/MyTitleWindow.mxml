@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="400" height="300"  showCloseButton="true" close="closeHandler()" title="保持流程图" backgroundAlpha="0.67">
+	<mx:Script>   
+        <![CDATA[   
+            import mx.managers.PopUpManager; 
+            import mx.controls.Alert;  
+            private function closeHandler(): void{   
+            	var save:Object = SharedObject.getLocal("save");
+            //	Alert.show(save.data.name);
+                PopUpManager.removePopUp(this);   
+            }   
+            private function saveFile(): void{
+               var save:Object = SharedObject.getLocal("save");
+               save.data.name=fileName.text;
+            //   Alert.show(save.data.value);
+               PopUpManager.removePopUp(this);   
+            
+            }
+        ]]>   
+    </mx:Script>   
+	<mx:Button x="58" y="193" label="保存" labelPlacement="bottom" id="save" enabled="true" click="saveFile()"/>
+	<mx:Button x="243" y="193" label="取消" id="cancel" labelPlacement="bottom" enabled="true" click="closeHandler()"/>
+	<mx:Label x="58" y="74" text="文件名：" width="61" height="23" fontFamily="Georgia" fontSize="12" color="#094C5A"/>
+	<mx:TextInput x="141" y="74" id="fileName" displayAsPassword="false" editable="true" enabled="true" width="180"/>
+</mx:TitleWindow>
